@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button id="toggleBtn">보이기 / 숨기기</button>
+
+    <div id="targetDiv" style="display:none; background:#eee; padding:20px; margin-top:10px;">
+        이 DIV가 나타났다가 사라집니다.
+    </div>
+    <script>
+        const btn = document.getElementById("toggleBtn");
+        const div = document.getElementById("targetDiv");
+
+        btn.addEventListener("click", () => {
+            if (div.style.display === "none") {
+                div.style.display = "block";   // 보이게
+            } else {
+                div.style.display = "none";    // 숨기기
+            }
+        });
+    </script>
+</body>
+
+</html>
