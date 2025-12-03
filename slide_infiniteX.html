@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .slide_wrap {
+            width: 400px;
+            height: 300px;
+            overflow: hidden;
+        }
+
+        .slide_train {
+            width: 1600px;
+            height: 300px;
+            display: flex;
+        }
+
+        .slide {
+            width: 400px;
+            height: 300px;
+        }
+        .slide:nth-child(1){
+            background-color: aquamarine;
+        }
+        .slide:nth-child(2){
+            background-color: chocolate;
+        }
+        .slide:nth-child(3){
+            background-color: aquamarine;
+        }
+        .slide:nth-child(4){
+            background-color: aquamarine;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="slide_wrap">
+        <div class="slide_train">
+            <div class="slide">구름이</div>
+            <div class="slide">멍멍이</div>
+            <div class="slide">멍멍구름구름</div>
+            <div class="slide">구름이</div>
+        </div>
+    </div>
+
+
+    <script>
+
+        const slide_train = document.querySelector('.slide_train');
+        const slideItems = document.querySelectorAll('.slide');
+        const slideCount = slideItems.length;
+
+        // 1) 첫 번째 이미지를 복제해서 뒤에 붙이기
+        // const clone = slideItems[0].cloneNode(true);
+        // slide_train.appendChild(clone);
+
+        let index = 0;
+        const width = 400;
+
+        setInterval(() => {
+            index++;
+            slide_train.style.transition = "0.6s";
+            slide_train.style.transform = `translateX(${-width * index}px)`;
+
+            // 마지막 복제 이미지에 도달했을 때
+            if (index === 3) {
+                // 약간 딜레이 후 transition 제거 + 위치 초기화
+                setTimeout(() => {
+                    slide_train.style.transition = "none";
+                    slide_train.style.transform = `translateX(0px)`;
+                    index = 0;
+                }, 600); // transition 시간과 동일하게
+            }
+        }, 2500);
+    </script>
+</body>
+
+</html>
+<!--
+cloneNode()는 DOM 요소(노드)를 복제(복사) 하는 자바스크립트 메서드입니다.
+
+📌 cloneNode()의 기본 의미
+element.cloneNode(deep)
+
+
+element : 복제할 DOM 요소
+
+deep : true 또는 false
+
+true → 요소 + 그 안의 모든 자식 요소까지 깊은 복사(Deep clone)
+
+false → 요소만(껍데기만) 복사, 안의 내용은 복사하지 않음
+
+appendChild()는 DOM 요소(노드)를 특정 부모 요소의 "맨 마지막 자식"으로 추가하는 메서드입니다.
+
+setTimeout()은 일정 시간이 지난 후에 한 번만 특정 코드를 실행하도록 예약하는 자바스크립트 함수입니다.
+말 그대로 “타이머를 설정해서 나중에 실행해!” 라는 의미입니다.
+-->
+
+<!--코드 설명(한 줄씩 자세히)
+1) 요소 선택
+const slide_train = document.querySelector('.slide_train');
+const slideItems = document.querySelectorAll('.slide');
+const slideCount = slideItems.length;
+
+
+.slide_train : 모든 슬라이드를 감싸는 컨테이너
+
+.slide : 각각의 슬라이드(이미지)
+
+slideCount : 슬라이드 개수
+
+2) 첫 번째 슬라이드를 복제해서 맨 뒤에 붙이기
+const clone = slideItems[0].cloneNode(true);
+slide_train.appendChild(clone);
+
+
+
+
+슬라이드를 끝없이 반복하는 “무한 슬라이드”를 만들기 위한 핵심 코드
+
+첫 번째 슬라이드를 복제해서 마지막에 추가하면
+→ 마지막 슬라이드에서 자연스럽게 처음 슬라이드로 넘어가는 느낌을 줌
+
+3) 초기 값 설정
+let index = 0;
+const width = 1200;
+
+
+index : 현재 어느 슬라이드를 보여주는지 표시하는 변수
+
+width = 1200 : 슬라이드 하나의 너비(px)
+
+4) 일정 시간마다 자동 슬라이드 이동
+setInterval(() => {
+    index++;
+    slide_train.style.transition = "0.6s";
+    slide_train.style.transform = `translateX(${-width * index}px)`;
+
+
+2.5초마다(2500ms) index 증가
+
+transition 0.6초로 슬라이드가 부드럽게 이동
+
+transform: translateX(-1200 * index px)
+→ 슬라이드가 한 칸씩 왼쪽으로 이동
+
+5) 마지막 복제된 이미지에 도달했을 때 처리
+    if (index === slideCount) {
+        setTimeout(() => {
+            slide_train.style.transition = "none";
+            slide_train.style.transform = `translateX(0px)`;
+            index = 0;
+        }, 600);
+    }
+
+왜 필요한가?
+
+마지막 슬라이드는 사실 “첫 번째 슬라이드의 복제본”
+
+여기까지 이동한 후 transition 없이 순간적으로 첫 번째 슬라이드 위치로 되돌려야 자연스러운 무한 슬라이드가 됨
+
+동작 순서
+
+index === slideCount → 복제슬라이드 도착
+
+0.6초(transition 시간) 기다림
+
+transition을 제거함 → “순간 이동”이 가능해짐
+
+X좌표를 0으로 설정 → 첫 번째 슬라이드 위치로 점프
+
+index = 0 → 초기화
+
+이렇게 해서 사용자는 끊김 없이 계속 슬라이드를 보는 것처럼 느끼게 됨.
+
+📌 전체 동작 흐름 요약
+
+첫 번째 슬라이드 복제 → 맨 뒤에 붙임
+
+일정 시간마다 왼쪽으로 슬라이드 이동
+
+마지막 복제 슬라이드 도착하면
+→ 트랜지션 제거하고 위치를 0으로 순간 점프
+
+다시 자동 슬라이드 반복
+
+원하면 위 코드를 더 최적화하거나, 버튼 추가, 마우스 포커스 시 멈춤 같은 기능도 추가해줄 수 있어!-->
