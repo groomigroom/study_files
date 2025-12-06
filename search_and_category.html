@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>구름이 간식 모음</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            border: none;
+            outline: none;
+        }
+
+        body {
+            background-color: rgb(107, 209, 175);
+        }
+
+        .wrapper {
+            width: 95%;
+            margin: 0 auto;
+        }
+
+        #search_container {
+            margin: 1em 0;
+        }
+
+        #search_container>input {
+            background-color: transparent;
+            width: 40%;
+            border-bottom: 2px solid chocolate;
+            padding: 1em 0;
+        }
+
+        /*
+        padding: 1em 0; 에서 em의 기준은 해당 요소의 글꼴 크기(font-size) 입니다.
+
+✔ 자세한 설명
+
+1em = 현재 요소(#search_container > input)에 적용된 font-size 값.
+
+예를 들어 이 input 요소의 font-size가 16px라면
+1em = 16px → padding-top과 padding-bottom이 각각 16px이 됩니다.
+
+만약 input에 font-size가 따로 지정되지 않았다면 부모 요소의 font-size를 상속받아 그 값을 기준으로 계산합니다.
+        */
+
+        #search_container>input:focus {
+            border-bottom-color: #fa68b8;
+        }
+
+        #search_container button {
+            padding: 1em 2em;
+            margin-left: 1em;
+            background-color: #333333;
+            color: #ffffff;
+            border-radius: 5px;
+            margin-top: 0.5em;
+
+        }
+
+        .button_value {
+            border: 2px solid #ffffff;
+            padding: 1em 2.2em;
+            border-radius: 3em;
+            background-color: transparent;
+            color: #333333;
+            cursor: pointer;
+        }
+
+        .active {
+            background-color: #333333;
+            color: #fff;
+        }
+
+        #products {
+            display: grid;
+            grid-template-columns: auto auto auto;
+            grid-column-gap: 1.5em;
+            padding: 2em 0;
+        }
+
+        .card {
+            background-color: #fff;
+            max-width: 18em;
+            margin-top: 1em;
+            padding: 1em;
+            border-radius: 5px;
+            box-shadow: 1em 2em 2.5em #33333346;
+        }
+
+        .image_container {
+            text-align: center;
+        }
+
+        img {
+            max-width: 100%;
+            object-fit: contain;
+        }
+
+        /*
+            object-fit: contain; 은 이미지나 비디오 같은 요소를 잘리지 않도록 전체가 보이게 유지하면서, 주어진 박스 안에 비율을 유지한 채로 맞춰 넣는 방식을 의미합니다.
+
+            🔎 간단한 정의
+
+            요소의 비율을 유지하면서 전체 콘텐츠가 박스 안에 모두 들어가도록 축소·확대한다.
+            남는 공간이 생기면 여백이 생긴다.
+            */
+
+        .container {
+            padding-top: 1em;
+            color: #333333;
+        }
+
+        .container h5 {
+            font-weight: 500;
+        }
+
+        .hide {
+            display: none;
+        }
+
+        @media screen and (max-width: 720px) {
+            img {
+                max-width: 100%;
+                object-fit: contain;
+                height: 10em;
+            }
+
+            .card {
+                max-width: 10em;
+                margin-top: 1em;
+            }
+
+            #products {
+                grid-template-columns: auto auto;
+                grid-column-gap: 1em;
+            }
+        }
+
+        /*자바스크립트 작성하기*/
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div id="search_container">
+            <input type="search" id="search_input" placeholder="구름이 간식을 검색해 보세요." />
+            <button id="search">검색해요</button>
+        </div>
+        <div id="buttons">
+            <button class="button_value" onclick="filter_product('모든거에요')">모든거에요</button>
+            <button class="button_value" onclick="filter_product('민트맛이에요')">민트맛이에요</button>
+            <button class="button_value" onclick="filter_product('연어맛인데요')">연어맛인데요</button>
+            <button class="button_value" onclick="filter_product('고기맛껌들')">고기맛껌들</button>
+            <button class="button_value" onclick="filter_product('두부가든껌')">두부가든껌</button>
+        </div>
+        <div id="products"></div>
+    </div>
+    <script>
+        let products = {
+            data: [
+                {
+                    product_name: "민트가득 껌",
+                    category: "민트맛이에요",
+                    price: "300",
+                    image: "ddd.jpg",
+                },
+                {
+                    product_name: "민트좋아 껌",
+                    category: "민트맛이에요",
+                    price: "400",
+                    image: "dddd.jpg",
+                },
+                {
+                    product_name: "민트는 좋은거 껌",
+                    category: "민트맛이에요",
+                    price: "300",
+                    image: "ddddd.jpg",
+                },
+                {
+                    product_name: "민트는 좋은거요 껌",
+                    category: "민트맛이에요",
+                    price: "500",
+                    image: "dddddd.jpg",
+                },
+                {
+                    product_name: "연어 가득 껌",
+                    category: "연어맛인데요",
+                    price: "300",
+                    image: "cccc.jpg",
+                },
+                {
+                    product_name: "연어 조금 껌",
+                    category: "연어맛인데요",
+                    price: "200",
+                    image: "ccccc.jpg",
+                },
+                {
+                    product_name: "연어 조금 가득 껌",
+                    category: "연어맛인데요",
+                    price: "1200",
+                    image: "cccccc.jpg",
+                },
+                {
+                    product_name: "연어 바삭 바삭 껌",
+                    category: "연어맛인데요",
+                    price: "400",
+                    image: "ccddcccc.jpg",
+                },
+                {
+                    product_name: "소고기 껌",
+                    category: "고기맛껌들",
+                    price: "500",
+                    image: "dsfjdk.jpg",
+                },
+                {
+                    product_name: "돼지고기 껌",
+                    category: "고기맛껌들",
+                    price: "300",
+                    image: "dsdk.jpg",
+                },
+                {
+                    product_name: "닭고기 껌",
+                    category: "고기맛껌들",
+                    price: "1200",
+                    image: "dsdddk.jpg",
+                },
+                {
+                    product_name: "오리고기 껌",
+                    category: "고기맛껌들",
+                    price: "250",
+                    image: "ddfdfdk.jpg",
+                },
+                {
+                    product_name: "두부 1단계 껌",
+                    category: "두부가든껌",
+                    price: "100",
+                    image: "dubuone.jpg",
+                },
+                {
+                    product_name: "두부 2단계 껌",
+                    category: "두부가든껌",
+                    price: "200",
+                    image: "dubutwo.jpg",
+                },
+                {
+                    product_name: "두부 3단계 껌",
+                    category: "두부가든껌",
+                    price: "300",
+                    image: "dubuthree.jpg",
+                },
+                {
+                    product_name: "두부 4단계 껌",
+                    category: "두부가든껌",
+                    price: "400",
+                    image: "dubufour.jpg",
+                },
+            ],
+        }
+
+        for (let i of products.data) {
+            let card = document.createElement("div")
+            card.classList.add("card", i.category, "hide")
+            let img_container = document.createElement("div")
+            img_container.classList.add("image_container")
+            let image = document.createElement("img")
+            image.setAttribute("src", i.image)
+            //자바스크립트의 element.setAttribute(name, value)는 HTML 요소(DOM 객체)의 특정 '속성(attribute)'에 새로운 값(value)을 설정하거나 기존 값을 변경하는 메서드
+            card.appendChild(img_container)
+            let container = document.createElement("div")
+            container.classList.add("container")
+            let name = document.createElement("h5")
+            name.classList.add("product_name")
+            name.innerText = i.product_name.toUpperCase()
+            container.appendChild(name)
+            let price = document.createElement("h6")
+            price.innerText = i.price + "원이에요"
+            container.appendChild(price)
+            card.appendChild(container)
+            document.querySelector("#products").appendChild(card)
+        }
+
+        function filter_product(value) {
+            let buttons = document.querySelectorAll(".button_value")
+            buttons.forEach(function (button) {
+                if (value.toUpperCase() == button.innerText.toUpperCase()) {
+                    button.classList.add("active")
+                } else {
+                    button.classList.remove("active")
+                }
+            })
+
+            let elements = document.querySelectorAll(".card")
+            elements.forEach(function (element) {
+                if (value == "모든거에요") {
+                    element.classList.remove("hide")
+                } else {
+                    if (element.classList.contains(value)) {
+                        //contains()해당 클래스가 있는지 검사
+                        element.classList.remove("hide")
+                    } else {
+                        element.classList.add("hide")
+                    }
+                }
+            })
+        }
+
+        document.querySelector("#search").addEventListener("click", function () {
+            let search_input = document.querySelector("#search_input").value
+            let elements = document.querySelectorAll(".product_name")
+            let cards = document.querySelectorAll(".card")
+
+            elements.forEach(function (element, index) {
+                if (element.innerText.includes(search_input.toUpperCase())) {
+                    //includes() 는 어떤 값이 내부에 포함되어 있는지 확인하는 메서드입니다. 문자열(String)과 배열(Array)에서 모두 사용됩니다.
+                cards[index].classList.remove("hide")
+                } else {
+                    cards[index].classList.add("hide")
+                }
+            })
+        })
+
+        window.onload = function(){
+            filter_product("모든거에요")
+        }
+
+    </script>
+</body>
+
+</html>
