@@ -1,0 +1,62 @@
+터미널에서 
+node 파일명.js 하면
+
+실행이 됨. 예시로 console.log 등등
+
+npm
+
+
+npm init 터미널 명령으로
+npm 정리 가능함.
+이 명령 후 엔터 자꾸 하면,
+package.json이 생성됨.
+여기에 설치된 npm이 작성됨
+
+npm install figlet -g로 하면 컴퓨터 전역에 설치되니, -g 하지 말기.
+
+figlet npm 사이트 예제 코드 입력해 보기.
+
+
+figlet npm 모듈이 있음.
+
+npm uninstall figlet 이런식으로 npm 모듈 삭제 가능함.
+
+express 프레임워크
+
+이거 기본 예제 해보기..
+
+app.listen(port, () => {
+console.log(`listening on port ${port}`)
+})
+
+app.get('/', () => {})
+app.get은 http 메소드
+'/'는 라우팅
+뒤에는 콜백 함수
+
+http 메소드는 요청의 목적, 종류를 알려주기 위해 사용하는 수단.
+get - 주소창
+post - 주소창은 x
+
+API 구조????
+프론트에서 요청(request) -> 백엔드
+백엔드에서 응답(Response) -> 프론트
+
+라우팅에 따라서 url 주소가 달리는 거.
+
+
+app.get('/', (req, res) => {
+res.send('Hello World!')
+})
+
+setTimeout(()=>{console.log("1초가 지났어요..")},1000)
+1초 후에 콘솔 로그가 됨.
+
+app.listen(port, ()=>{
+console.log(`Example app listening on port ${port}`)
+})
+
+30분까지 봄.
+https://www.youtube.com/watch?v=Tt_tKhhhJqY&t=3065s
+
+
