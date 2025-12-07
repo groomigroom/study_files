@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        @media screen and (min-width: 1260px) {
+            * {
+                font-size: 20px;
+            }
+        }
+
+        /* 768~1260px 의 스크린 너비에는 배경색 red 적용 */
+
+        @media screen and (max-width: 768px) {
+            * {
+                font-size: 14px;
+            }
+        }
+
+        /* 576~768px 의 스크린 너비에는 배경색 blue 적용 */
+
+        @media screen and (max-width: 576px) {
+            * {
+                font-size: 12px;
+            }
+        }
+
+        .full {
+            width: 100vw;
+            height: 200vw;
+            background-color: aquamarine;
+            display: flex;
+        }
+
+        .full_inside {
+            width: 47vw;
+            height: 47vw;
+            border: 1px solid red;
+            margin-left: 2vw;
+            font-size: 1em;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="full">
+        <div class="full_inside">zz</div>
+        <div class="full_inside">zz</div>
+    </div>
+</body>
+
+</html>
