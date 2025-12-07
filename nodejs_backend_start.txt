@@ -108,5 +108,51 @@ console.log(q.name)
 res.json({'userid': q.name})
 })
 
+
+app.get('/sound/:name',(req, res) => {
+const { name } = req.params
+
+if(name == "dog"){
+res.json({'sound': '멍멍이'})
+} else if(name == "cat"){
+res.json({'sound': '고양양이'})
+} else if(name == "pig"){
+res.json({'sound': '꿀꿀이'})
+} else {
+res.json({'sound': '모르는 동물'})
+}
+
+})
+
+api 서버 구축한거 위에꺼가
+
+npm cors 모듈 설치ㅡㅡㅡㅡㅡㅡ
+
+50분부터 나오는거 입력해 보기.
+
+!엔터 후에
+
+<h1 id='sound'></h1>
+<input id="name" type="text">
+<button onclick="getSound()">api 요청</button>
+<script>
+function getSound() {
+const name = document.querySelector('name').value
+fetch(`로컬호스트 주소로/sound/${name}`)
+.then((response) => response.json())
+.then((data) => console.log(data)
+document.querySelector('#name').value = data.sound
+)
+}
+</script>
+
+영상 뒤쪽 쯤에 확인하기ㅡㅡㅡㅡㅡㅡㅡ
+
+
+
+
+
+
+
 45.51분까지 봄.
 https://www.youtube.com/watch?v=Tt_tKhhhJqY&t=3065s
