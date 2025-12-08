@@ -1,0 +1,56 @@
+12월 6일 nodejs
+
+path 모듈
+
+path 모듈이 필요한 이유
+
+경로 구분자를 통일하는게 가능하다.
+
+맥 os 슬래시 사용해서
+
+예 /Users/funnycom/Desktop/basics/03/example.txt
+
+경로를 나누거나 합치는게 가능하다.
+
+절대 경로, 상대 경로
+
+절대 경로
+
+파일이나 폴더의 위치를 root 폴더부터 시작해서 파일까지 전부 다 나타내는 것
+
+/Users/funnycom/Desktop/basics/03/example.txt
+
+상대 경로
+
+기준이 되는 파일이 있을 경우 사용하는 경로
+
+같은 폴더에 있을 경우에 ./로 표기하고, 한 단계 위 부모 폴더에 있을 경우에 ../를 사용합니다.
+
+node.js에 보면 path 모듈이 있음.
+
+const path = require(“path”)
+const full_path = path.join(’some’, ‘work’, ‘ex.txt’)
+console.log(full_path)
+const dir = path.dirname(full_path)
+console.log(dir)
+
+const fn_one = path.basename(__filename)
+console.log(`전체 경로(__filename): ${__filename}`)
+console.log(fn_one)
+
+const fn_two = path.basename(__filename, ‘.js’)
+console.log(fn_two)
+
+
+8강
+
+const fs = require(“fs”)
+fs.readdir(“./“, )
+
+https://www.youtube.com/watch?v=cv33E5EXuwI&list=PLG7te9eYUi7vxSvo6hvhOaht8oP0PoCwi&index=8
+
+4분까지
+
+
+
+
