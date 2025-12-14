@@ -51,7 +51,7 @@
         .box_eight {
             width: 200px;
             height: 200px;
-            background: linear-gradient(#333333, 20%, #999999);
+            background: linear-gradient(#333333 20%, #999999);
         }
 
         .box_nine {
@@ -66,6 +66,224 @@
             background: linear-gradient(217deg, rgb(255 0 0 / 80%), rgb(255 0 0 / 0%) 70.71%),
                 linear-gradient(127deg, rgb(0 255 0 / 80%), rgb(0 255 0 / 0%) 70.71%),
                 linear-gradient(336deg, rgb(0 0 255 / 80%), rgb(0 0 255 / 0%) 70.71%);
+        }
+
+        .box_eleven {
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(#333333, 20%, #999999);
+        }
+
+        .box_twelve {
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(at 0% 25%, #333333, #f79292);
+        }
+
+        /*가능한 값으로는 closest-corner, closest-side, farthest-corner, 그리고 farthest-side 가 있으며 farthest-corner 가 기본값*/
+        .box_thirteen {
+            width: 400px;
+            height: 200px;
+            background: radial-gradient(ellipse closest-side,
+                    red,
+                    yellow 10%,
+                    #1e90ff 50%,
+                    beige);
+        }
+
+        .box_fourteen {
+            width: 200px;
+            height: 200px;
+            background:
+                radial-gradient(circle at 50% 0,
+                    rgb(255 0 0 / 50%),
+                    rgb(255 0 0 / 0%) 70.71%),
+                radial-gradient(circle at 6.7% 75%,
+                    rgb(0 0 255 / 50%),
+                    rgb(0 0 255 / 0%) 70.71%),
+                radial-gradient(circle at 93.3% 75%,
+                    rgb(0 255 0 / 50%),
+                    rgb(0 255 0 / 0%) 70.71%) beige;
+            border-radius: 50%;
+        }
+
+        .box_fifteen {
+            width: 200px;
+            height: 200px;
+            background: conic-gradient(rgb(197, 197, 197), rgb(216, 216, 255));
+        }
+
+        .box_sixteen {
+            width: 200px;
+            height: 200px;
+            background: conic-gradient(at 10% 30%, rgb(197, 197, 197), rgb(216, 216, 255));
+        }
+
+        .box_seventeen {
+            width: 200px;
+            height: 200px;
+            background: conic-gradient(from 45deg, rgb(197, 197, 197), rgb(216, 216, 255));
+        }
+
+        .box_eighteen {
+            width: 200px;
+            height: 200px;
+            background: repeating-linear-gradient(-45deg,
+                    rgb(197, 197, 197),
+                    rgb(94, 42, 42) 5px,
+                    rgb(108, 108, 218) 5px,
+                    blue 10px);
+        }
+
+        .box_nineteen {
+            width: 200px;
+            height: 200px;
+            background:
+                repeating-linear-gradient(190deg,
+                    rgb(255 0 0 / 50%) 40px,
+                    rgb(255 153 0 / 50%) 80px,
+                    rgb(255 255 0 / 50%) 120px,
+                    rgb(0 255 0 / 50%) 160px,
+                    rgb(0 0 255 / 50%) 200px,
+                    rgb(75 0 130 / 50%) 240px,
+                    rgb(238 130 238 / 50%) 280px,
+                    rgb(255 0 0 / 50%) 300px),
+                repeating-linear-gradient(-190deg,
+                    rgb(255 0 0 / 50%) 30px,
+                    rgb(255 153 0 / 50%) 60px,
+                    rgb(255 255 0 / 50%) 90px,
+                    rgb(0 255 0 / 50%) 120px,
+                    rgb(0 0 255 / 50%) 150px,
+                    rgb(75 0 130 / 50%) 180px,
+                    rgb(238 130 238 / 50%) 210px,
+                    rgb(255 0 0 / 50%) 230px),
+                repeating-linear-gradient(23deg,
+                    red 50px,
+                    orange 100px,
+                    yellow 150px,
+                    green 200px,
+                    blue 250px,
+                    indigo 300px,
+                    violet 350px,
+                    red 370px);
+        }
+
+        .box_twenty {
+            width: 200px;
+            height: 200px;
+            background:
+                repeating-linear-gradient(90deg,
+                    transparent,
+                    transparent 50px,
+                    rgb(255 127 0 / 25%) 50px,
+                    rgb(255 127 0 / 25%) 56px,
+                    transparent 56px,
+                    transparent 63px,
+                    rgb(255 127 0 / 25%) 63px,
+                    rgb(255 127 0 / 25%) 69px,
+                    transparent 69px,
+                    transparent 116px,
+                    rgb(255 206 0 / 25%) 116px,
+                    rgb(255 206 0 / 25%) 166px),
+                repeating-linear-gradient(0deg,
+                    transparent,
+                    transparent 50px,
+                    rgb(255 127 0 / 25%) 50px,
+                    rgb(255 127 0 / 25%) 56px,
+                    transparent 56px,
+                    transparent 63px,
+                    rgb(255 127 0 / 25%) 63px,
+                    rgb(255 127 0 / 25%) 69px,
+                    transparent 69px,
+                    transparent 116px,
+                    rgb(255 206 0 / 25%) 116px,
+                    rgb(255 206 0 / 25%) 166px),
+                repeating-linear-gradient(-45deg,
+                    transparent,
+                    transparent 5px,
+                    rgb(143 77 63 / 25%) 5px,
+                    rgb(143 77 63 / 25%) 10px),
+                repeating-linear-gradient(45deg,
+                    transparent,
+                    transparent 5px,
+                    rgb(143 77 63 / 25%) 5px,
+                    rgb(143 77 63 / 25%) 10px);
+
+            background:
+                repeating-linear-gradient(90deg,
+                    transparent 0 50px,
+                    rgb(255 127 0 / 25%) 50px 56px,
+                    transparent 56px 63px,
+                    rgb(255 127 0 / 25%) 63px 69px,
+                    transparent 69px 116px,
+                    rgb(255 206 0 / 25%) 116px 166px),
+                repeating-linear-gradient(0deg,
+                    transparent 0 50px,
+                    rgb(255 127 0 / 25%) 50px 56px,
+                    transparent 56px 63px,
+                    rgb(255 127 0 / 25%) 63px 69px,
+                    transparent 69px 116px,
+                    rgb(255 206 0 / 25%) 116px 166px),
+                repeating-linear-gradient(-45deg,
+                    transparent 0 5px,
+                    rgb(143 77 63 / 25%) 5px 10px),
+                repeating-linear-gradient(45deg,
+                    transparent 0 5px,
+                    rgb(143 77 63 / 25%) 5px 10px);
+        }
+
+        .box_twentyone {
+            width: 200px;
+            height: 200px;
+            background: repeating-radial-gradient(black,
+                    black 5px,
+                    white 5px,
+                    white 10px);
+        }
+
+        .box_twentytwo {
+            width: 200px;
+            height: 200px;
+            background:
+                repeating-radial-gradient(ellipse at 80% 50%,
+                    rgb(0 0 0 / 50%),
+                    rgb(0 0 0 / 50%) 15px,
+                    rgb(255 255 255 / 50%) 15px,
+                    rgb(255 255 255 / 50%) 30px) top left no-repeat,
+                repeating-radial-gradient(ellipse at 20% 50%,
+                    rgb(0 0 0 / 50%),
+                    rgb(0 0 0 / 50%) 10px,
+                    rgb(255 255 255 / 50%) 10px,
+                    rgb(255 255 255 / 50%) 20px) top left no-repeat yellow;
+            background-size:
+                200px 200px,
+                150px 150px;
+        }
+
+        .box_twentythree {
+            width: 200px;
+            height: 200px;
+            background: repeating-conic-gradient(#66ccff 0% 8.25%,
+                    #6633ff 8.25% 16.5%,
+                    #ff3399 16.5% 25%);
+        }
+
+        .box_twentyfour {
+            width: 200px;
+            height: 200px;
+            background:
+                repeating-conic-gradient(from 0deg at 80% 50%,
+                    #5691f580 0% 8.25%,
+                    #b338ff80 8.25% 16.5%,
+                    #f8305880 16.5% 25%),
+                repeating-conic-gradient(from 15deg at 50% 50%,
+                    #e856f580 0% 8.25%,
+                    #ff384c80 8.25% 16.5%,
+                    #e7f83080 16.5% 25%),
+                repeating-conic-gradient(from 0deg at 20% 50%,
+                    #f58356ff 0% 8.25%,
+                    #caff38ff 8.25% 16.5%,
+                    #30f88aff 16.5% 25%);
         }
     </style>
 </head>
@@ -91,12 +309,37 @@
     <div class="box_nine"></div>
     <!--중첩된 그라디언트-->
     <div class="box_ten"></div>
+    <!--기본 방사형 그라디언트-->
+    <div class="box_eleven"></div>
+    <!--그라디언트의 중심 위치 설정하기-->
+    <div class="box_twelve"></div>
+    <!--방사형 그라디언트 크기 조절하기-->
+    <div class="box_thirteen"></div>
+    <!--중첩 방사형 그라디언트-->
+    <div class="box_fourteen"></div>
+    <!--원뿔형 그라디언트-->
+    <div class="box_fifteen"></div>
+    <!--원뿔형 그라디언트 중심 위치 설정하기-->
+    <div class="box_sixteen"></div>
+    <!--원뿔형 그라디언트 각도 변경하기-->
+    <div class="box_seventeen"></div>
+    <!--반복되는 선형 그라디언트-->
+    <div class="box_eighteen"></div>
+    <!--다수의 반복되는 선형 그라디언트-->
+    <div class="box_nineteen"></div>
+    <!--다수의 반복되는 선형 그라디언트-->
+    <div class="box_twenty"></div>
+    <!--반복되는 방사형 그라디언트-->
+    <div class="box_twentyone"></div>
+    <!--다수의 반복되는 방사형 그라디언트-->
+    <div class="box_twentytwo"></div>
+    <!--반복되는 원뿔형 그라디언트-->
+    <div class="box_twentythree"></div>
+    <!--다수의 반복되는 원뿔형 그라디언트-->
+    <div class="box_twentyfour"></div>
+
 
 
 </body>
 
 </html>
-
-<!--방사형 그라디언트 사용하기부터
-https://developer.mozilla.org/ko/docs/Web/CSS/Guides/Images/Using_gradients
--->
