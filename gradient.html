@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box_one {
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(#333333, #d6cccc);
+        }
+
+        .box_two {
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(to right, #333333, #d6cccc);
+        }
+
+        .box_three {
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(to bottom right, #333333, #d6cccc);
+        }
+
+        .box_four {
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(50deg, #333333, #d6cccc);
+        }
+
+        .box_five {
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(#333333, #ae9898, #d6cccc, #333333);
+        }
+
+        .box_six {
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(#333333, #ae9898 30px, #d6cccc 45px, #333333);
+        }
+
+        .box_seven {
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(to bottom left, #333333 50%, #999999 50%);
+        }
+
+        .box_eight {
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(#333333, 20%, #999999);
+        }
+
+        .box_nine {
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(#333333, 20%, #999999), url("이미지 경로");
+        }
+
+        .box_ten {
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(217deg, rgb(255 0 0 / 80%), rgb(255 0 0 / 0%) 70.71%),
+                linear-gradient(127deg, rgb(0 255 0 / 80%), rgb(0 255 0 / 0%) 70.71%),
+                linear-gradient(336deg, rgb(0 0 255 / 80%), rgb(0 0 255 / 0%) 70.71%);
+        }
+    </style>
+</head>
+
+<body>
+    <!--위에서 아래로 그라디언트-->
+    <div class="box_one"></div>
+    <!--방향이 설정된 그라디언트-->
+    <div class="box_two"></div>
+    <!--대각선 그라디언트-->
+    <div class="box_three"></div>
+    <!--각도 이용하는 그라디언트-->
+    <div class="box_four"></div>
+    <!--2가지 이상의 색상을 사용하는 그라디언트-->
+    <div class="box_five"></div>
+    <!--2가지 이상의 색상을 사용하면서 색상 정지 지점 위치를 설정하는 그라디언트-->
+    <div class="box_six"></div>
+    <!--명확한 선 생성하기 그라디언트-->
+    <div class="box_seven"></div>
+    <!--중간 지점을 이동한 그라디언트-->
+    <div class="box_eight"></div>
+    <!--그라디언트와 이미지 겹치기-->
+    <div class="box_nine"></div>
+    <!--중첩된 그라디언트-->
+    <div class="box_ten"></div>
+
+
+</body>
+
+</html>
+
+<!--방사형 그라디언트 사용하기부터
+https://developer.mozilla.org/ko/docs/Web/CSS/Guides/Images/Using_gradients
+-->
