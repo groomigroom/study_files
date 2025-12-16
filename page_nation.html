@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>상품 목록</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            padding: 20px;
+            text-align: center;
+            background: #222;
+            color: #fff;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        /* 4x4 상품 그리드 */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .product {
+            border: 1px solid #ddd;
+            padding: 16px;
+            text-align: center;
+        }
+
+        .product img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            margin-bottom: 10px;
+            background: #f5f5f5;
+        }
+
+        /* 페이지네이션 */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 40px;
+            gap: 10px;
+        }
+
+        .pagination button {
+            padding: 8px 14px;
+            border: 1px solid #ccc;
+            background: #fff;
+            cursor: pointer;
+        }
+
+        .pagination button.active {
+            background: #222;
+            color: #fff;
+            border-color: #222;
+        }
+    </style>
+
+</head>
+
+<body>
+    <header id="top">
+        <h1>상품 목록</h1>
+    </header>
+    <div class="container">
+        <div id="productGrid" class="product-grid"></div>
+        <div id="pagination" class="pagination"></div>
+
+    </div>
+    <script>
+        // 전체 상품 데이터 (예시)
+        const products = Array.from({ length: 64 }, (_, i) => ({
+            name: `상품 ${i + 1}`,
+            price: `${(i + 1) * 1000}원`
+        }));
+
+        const itemsPerPage = 16; // 4x4
+        let currentPage = 1;
+
+        const productGrid = document.getElementById('productGrid');
+        const pagination = document.getElementById('pagination');
+
+        function renderProducts(page) {
+            productGrid.innerHTML = '';
+            const start = (page - 1) * itemsPerPage;
+            const end = start + itemsPerPage;
+            const pageItems = products.slice(start, end);
+
+            pageItems.forEach(product => {
+                const div = document.createElement('div');
+                div.className = 'product';
+                div.innerHTML = `
+          <img alt="상품 이미지" />
+          <h3>${product.name}</h3>
+          <p>${product.price}</p>
+        `;
+                productGrid.appendChild(div);
+            });
+        }
+
+        function renderPagination() {
+            pagination.innerHTML = '';
+            const totalPages = Math.ceil(products.length / itemsPerPage);
+
+            for (let i = 1; i <= totalPages; i++) {
+                const btn = document.createElement('button');
+                btn.textContent = i;
+                if (i === currentPage) btn.classList.add('active');
+
+                btn.addEventListener('click', () => {
+                    currentPage = i;
+                    renderProducts(currentPage);
+                    renderPagination();
+
+                    // 페이지 이동 시 최상단으로 스크롤
+                    window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth'
+                    });
+                });
+
+                pagination.appendChild(btn);
+            }
+        }
+
+        // 초기 렌더링
+        renderProducts(currentPage);
+        renderPagination();
+    </script>
+
+</body>
+
+</html>
