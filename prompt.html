@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let groomi = prompt("이름 입력하기", "김구름"); //프롬프트 창에 기본값으로 김구름 있음.
+        if (groomi == null) {
+            document.write('<p>null이다.</p>'); //취소 누를 때 null
+        }
+        else if (groomi == "") {
+            document.write('<p>글자가 없다.</p>');
+        }
+        else {
+            document.write(`<p>${groomi}</p>`);
+        }
+    </script>
+</body>
+
+</html>
