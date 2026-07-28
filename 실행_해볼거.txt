@@ -1,4 +1,3 @@
-alert("김구름");
 document.write("<h3>kimgroom</h3>");
 
 let ret = prompt("이름 입력하기", "김구름");
