@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>for문 글자크기</title>
+</head>
+
+<body>
+    <h1>학점 출력</h1>
+    <script>
+        let grade;
+        let score = prompt("김구름님 점수 입력", 100);
+        score = parseInt(score);
+        if (score >= 90) {
+            grade = "1등급";
+        }
+        else if (score >= 80) {
+            grade = "2등급";
+        }
+        else if (score >= 70) {
+            grade = "3등급";
+        }
+        else {
+            grade = "꼴등";
+        }
+        document.write("<h1>" + score + "점은 " + grade + "이다.</h1>");
+    </script>
+</body>
+
+</html>
