@@ -1,4 +1,6 @@
-function adder
+function adder (a, b) {
+
+}
 
 
 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
