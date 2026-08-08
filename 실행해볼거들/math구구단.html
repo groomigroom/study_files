@@ -5,3 +5,12 @@ function randomInt() {
 let ques = randomInt() + "*" + randomInt();
 
 let user = prompt(ques + " 값은 얼마?", 0);
+
+if (user == null) {
+  document.write("구구단 연습 종료");
+}
+else {
+  let ans = eval(ques);
+  if (ans == user)
+    document.write("정답!!! ");
+}
