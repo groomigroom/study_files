@@ -1,18 +1,3 @@
-function adder (a, b) {
-    let sum;
-    sum = a + b;
-    return sum;
-}
-let c = 44;
-let d = 77;
-
-let n = adder(c, d);
-document.write("<h3>" + c + " + " + d + " = " + n + "</h3>");
-
-
-ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
-
-
 <!DOCTYPE html>
 <html lang="ko">
 
