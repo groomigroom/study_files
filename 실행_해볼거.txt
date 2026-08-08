@@ -8,7 +8,7 @@ do {
     sum += i;
     i++;
 } while (i <= n);
-document.write(
+document.write("<div><p>0에서 " +
 0에서 n까지합은 sum
 
 
