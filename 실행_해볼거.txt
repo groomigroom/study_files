@@ -1,3 +1,12 @@
+
+
+
+let n = prompt
+
+
+ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+
+
 function adder (a, b) {
     let sum;
     sum = a + b;
