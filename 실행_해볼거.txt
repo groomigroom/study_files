@@ -4,6 +4,8 @@ function adder (a, b) {
     return sum;
 }
 
+let n = adder(44, 77);
+
 
 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
 
