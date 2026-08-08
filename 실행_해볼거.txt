@@ -4,6 +4,9 @@
 let n = prompt ("0보다 큰 정수 입력", 0);
 n = parseInt(n);
 let i = 0, sum = 0;
+do {
+    sum += i;
+}
 
 
 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
