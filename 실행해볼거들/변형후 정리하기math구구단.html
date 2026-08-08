@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function randomInt() {
+            return Math.floor(Math.random() * 9) + 1;
+        }
+
+        let ques = randomInt() + "*" + randomInt();
+
+        let user = prompt(ques + " 값은 얼마?", 0);
+
+        if (user == null) {
+            document.write("구구단 연습 종료");
+        }
+        else {
+            let ans = eval(ques);
+            if (ans == user)
+                document.write("정답!!! ");
+            else
+                document.write("정답 아님 ");
+            document.write(ques + "=" + ans + "입니다.");
+        }
+    </script>
+</body>
+
+</html>
