@@ -1,5 +1,9 @@
 function inquiry() {return this.balance;}
 function deposit(money) {this.balance += money;}
+function withdraw(money) {
+  this.balance -= money;
+  return money;
+}
 
 let account = new Object();
 account.owner = "김구름";
