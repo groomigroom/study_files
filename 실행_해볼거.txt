@@ -3,8 +3,10 @@ function adder (a, b) {
     sum = a + b;
     return sum;
 }
+let c = 44;
+let d = 77;
 
-let n = adder(44, 77);
+let n = adder(c, d);
 
 
 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
