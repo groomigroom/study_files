@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>c</title>
+</head>
+
+<body>
+    <script>
+        let a = new String("kim goo rem");
+        let b = "!!";
+        document.write("a는 " + a + "<br>");
+        document.write("b는 " + b + "<br>");
+        document.write("a의 첫번째 글자는 " + a.charAt(0) + "입니다.<br>");
+        document.write("concat<br>");
+        document.write(a.concat(b, "입니다."));
+        document.write("indexOf<br>");
+        document.write(a.indexOf("g") + "<br>");
+        document.write(a.indexOf("rem") + "<br>");
+        document.write(a.slice(5, 8) + "<br>");
+        document.write(a.substr(5, 3) + "<br>");
+        document.write(a.toUpperCase() + "<br>");
+        document.write(a.replace("goo", "koo") + "<br>");
+        document.write("   goorem.  ".trim() + "<br>");
+
+        let sub = a.split(" ");
+        document.write("a를 빈칸으로 분리");
+        for (let i = 0; i < sub.length; i++) {
+            document.write("sub" + i + "=" + sub[i] + "<br>");
+        }
+
+        document.write(a + "는 그대로" + b);
+    </script>
+</body>
+
+</html>
+
+<!-- a는 kim goo rem
+b는 !!
+a의 첫번째 글자는 k입니다.
+concat
+kim goo rem!!입니다.indexOf
+4
+8
+oo
+oo
+KIM GOO REM
+kim koo rem
+goorem.
+a를 빈칸으로 분리sub0=kim
+sub1=goo
+sub2=rem
+kim goo rem는 그대로!! -->
