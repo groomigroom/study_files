@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function Account(owner, code, balance) {
+            this.owner = owner;
+            this.code = code;
+            this.balance = balance;
+
+            this.inquiry = function () {return this.balance;}
+            this.deposit = function (money) {this.balance += money;}
+            this.withdraw = function (money) {
+                this.balance -= money;
+                return money;
+            }
+        }
+
+        let account = new Account("김구름", "111", 22000);
+
+        document.write("account : " + account.owner + ", " + account.code + ", " + account.balance + "<br>");
+        account.deposit(20000);
+        document.write("20000원 저금 후 잔액은 " + account.inquiry() + "<br>" + account.balance + "<br>");
+        account.withdraw(50000);
+        document.write("50000원 인출 후 잔액은 " + account.inquiry() + "<br>" + account.balance + "<br>");
+
+    </script>
+</body>
+
+</html>
