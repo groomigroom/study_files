@@ -1,0 +1,12 @@
+<body>
+<h3>아래 글자 클릭시에 강아지가 보입니다.</h3>
+<p class="firstP" onclick="change()">
+여기를 클릭하세요.
+</p>
+<script>
+function change() {
+let firstP = document.querySelector(".firstP");
+firstP.innerHTML = "김구름<img src= alt="김구름">";
+}
+</script>
+</body>
