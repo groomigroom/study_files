@@ -1,0 +1,225 @@
+네. 지금 코드에서 핵심은 두 군데의 좌표를 원하는 장소의 좌표로 바꾸는 것입니다.
+
+현재 코드에는 다음 좌표가 서로 다릅니다.
+
+// 지도 중심
+center: new kakao.maps.LatLng(35.1502875, 126.8554219)
+
+// 마커 위치
+markerPosition = new kakao.maps.LatLng(37.54699, 127.09598)
+
+// 오버레이 위치
+position = new kakao.maps.LatLng(37.54699, 127.09598)
+
+그래서 지도는 광주 쪽을 중심으로 보여주는데, 마커는 서울 쪽에 찍히는 상태입니다.
+
+1. 원하는 장소의 위도·경도 알아내기
+
+예를 들어 광주광역시청을 표시하고 싶다고 해보겠습니다.
+
+카카오맵에서 주소를 검색하면 해당 장소의 좌표를 확인할 수 있고, 더 편하게 하려면 카카오 지도 주소 검색 API/Geocoder를 이용해서 "광주광역시 서구 내방로 111" 같은 주소를 좌표로 변환할 수 있습니다.
+
+즉,
+
+주소
+↓
+위도(latitude), 경도(longitude)
+↓
+new kakao.maps.LatLng(위도, 경도)
+
+형태입니다.
+
+2. 직접 좌표를 넣는 가장 간단한 방법
+
+예를 들어 원하는 장소의 좌표가
+
+위도: 35.1601
+경도: 126.8515
+
+라면 다음처럼 통일하면 됩니다.
+
+var mapContainer = document.getElementById('map');
+
+var mapOption = {
+    center: new kakao.maps.LatLng(35.1601, 126.8515),
+    level: 4
+};
+
+var map = new kakao.maps.Map(mapContainer, mapOption);
+
+
+// 마커 위치
+var markerPosition = new kakao.maps.LatLng(35.1601, 126.8515);
+
+var marker = new kakao.maps.Marker({
+    position: markerPosition
+});
+
+marker.setMap(map);
+
+
+// 커스텀 오버레이
+var content =
+    '<div class="customoverlay">' +
+    '    <a href="https://kko.to/32GmVOKXVH" target="_blank">' +
+    '        <span class="title">광주광역시청</span>' +
+    '    </a>' +
+    '</div>';
+
+var customOverlay = new kakao.maps.CustomOverlay({
+    map: map,
+    position: markerPosition,
+    content: content,
+    yAnchor: 1
+});
+
+여기서 중요한 것은 markerPosition을 하나만 만들어서 지도와 마커와 오버레이가 모두 사용하도록 하는 것입니다.
+
+
+---
+
+3. 주소만 입력하면 자동으로 지도 위치를 바꾸고 싶다면
+
+이 방법이 실제 웹사이트를 만들 때 더 좋습니다.
+
+카카오맵의 services 라이브러리를 추가합니다.
+
+<script type="text/javascript"
+    src="//dapi.kakao.com/v2/maps/sdk.js?appkey=발급받은_APP_KEY&libraries=services"></script>
+
+그리고 주소를 입력하면:
+
+var mapContainer = document.getElementById('map');
+
+var mapOption = {
+    center: new kakao.maps.LatLng(35.1502875, 126.8554219),
+    level: 4
+};
+
+var map = new kakao.maps.Map(mapContainer, mapOption);
+
+// 주소-좌표 변환 객체 생성
+var geocoder = new kakao.maps.services.Geocoder();
+
+// 원하는 주소
+var address = '광주광역시 서구 내방로 111';
+
+geocoder.addressSearch(address, function(result, status) {
+
+    if (status === kakao.maps.services.Status.OK) {
+
+        var coords = new kakao.maps.LatLng(
+            result[0].y,
+            result[0].x
+        );
+
+        // 지도 중심 이동
+        map.setCenter(coords);
+
+        // 마커 생성
+        var marker = new kakao.maps.Marker({
+            map: map,
+            position: coords
+        });
+
+        // 오버레이
+        var content =
+            '<div class="customoverlay">' +
+            '    <span class="title">광주광역시청</span>' +
+            '</div>';
+
+        var customOverlay = new kakao.maps.CustomOverlay({
+            map: map,
+            position: coords,
+            content: content,
+            yAnchor: 1
+        });
+    }
+});
+
+여기서 핵심 부분은 이것입니다.
+
+geocoder.addressSearch(address, function(result, status) {
+
+address에 주소를 넣으면 카카오가 해당 주소를 찾아서 좌표를 반환합니다.
+
+result[0].y // 위도
+result[0].x // 경도
+
+그리고
+
+var coords = new kakao.maps.LatLng(
+    result[0].y,
+    result[0].x
+);
+
+로 카카오맵 좌표를 만들어 줍니다.
+
+
+---
+
+4. 주소와 가게 이름, 링크까지 관리한다면
+
+예를 들어 나중에 Spring Boot + Thymeleaf로 가게 정보를 DB에서 가져온다고 하면 이런 구조가 굉장히 유용합니다.
+
+var address = '광주광역시 서구 내방로 111';
+var storeName = '광주광역시청';
+var storeLink = 'https://kko.to/32GmVOKXVH';
+
+그리고 주소를 좌표로 변환해서:
+
+geocoder.addressSearch(address, function(result, status) {
+
+    if (status === kakao.maps.services.Status.OK) {
+
+        var coords = new kakao.maps.LatLng(
+            result[0].y,
+            result[0].x
+        );
+
+        map.setCenter(coords);
+
+        var marker = new kakao.maps.Marker({
+            map: map,
+            position: coords
+        });
+
+        var content =
+            '<div class="customoverlay">' +
+            '    <a href="' + storeLink + '" target="_blank">' +
+            '        <span class="title">' + storeName + '</span>' +
+            '    </a>' +
+            '</div>';
+
+        var customOverlay = new kakao.maps.CustomOverlay({
+            map: map,
+            position: coords,
+            content: content,
+            yAnchor: 1
+        });
+    }
+});
+
+이렇게 하면 주소만 DB에서 가져와도 자동으로 지도 위치가 결정됩니다.
+
+특히 지금처럼 Spring Boot + Thymeleaf를 공부하고 계신다면, 다음 단계에서는
+
+DB
+ ↓
+가게 이름
+가게 주소
+가게 링크
+ ↓
+Thymeleaf
+ ↓
+JavaScript
+ ↓
+카카오 주소 검색 API
+ ↓
+주소 → 위도/경도
+ ↓
+카카오맵에 마커 표시
+
+이 구조로 만들면 실제 쇼핑몰이나 음식점 사이트의 매장 위치 지도 기능처럼 구현할 수 있습니다.
+
+그리고 현재 코드에 있는 카카오 REST API 키가 아니라 JavaScript 키를 사용해야 한다는 점, 그리고 실제 배포 시 JavaScript 키의 도메인 등록도 중요합니다.
