@@ -35,3 +35,62 @@
 
 혹시 특정 지역 이름이나 건물 이름을 알려주시면 제가 대신 좌표를 찾아서 카카오맵 링크 주소와 함께 정리해 드릴까요? 변환하고 싶은 장소를 편하게 말씀해 주세요!
 
+
+보내주신 구글 지도 주소(URL) 속에서 위도와 경도 좌표를 알아내는 방법은 생각보다 훨씬 간단합니다!
+구글 지도가 생성한 길고 복잡한 주소창 주소를 자세히 뜯어보면, 특정 규칙에 따라 위도와 경도 숫자가 이미 텍스트 파일처럼 그대로 박혀서 표현되고 있습니다.
+------------------------------
+## 🔎 주소 분석을 통해 좌표 추출하는 방법
+보내주신 링크 주소는 다음과 같습니다:
+
+https://www.google.co.kr/maps/place/%EA%B4%91%EC%A3%BC%EA%B4%91%EC%97%AD%EC%8B%9C+5V24%2B457/data=!3m1!4b1!4m5!3m4!1s0x3571892301f5a7af:0x6602d6cbba9e959e!8m2!3d35.1502875!4d126.8554219?entry=ttu&g_ep=EgoyMDI2MDgxOS4wIKXMDSoASAFQAw%3D%3D
+
+이 링크 중간을 보시면 !8m2!3d35.1502875!4d126.8554219라는 영어와 숫자 조합이 보이실 겁니다. 구글 지도 주소 체계에서 이 알파벳 약어는 다음과 같은 위도·경도 데이터 값을 의미합니다.
+
+* 
+* !3d 뒤에 오는 숫자: 위도(Latitude) ➡️ 35.1502875
+* !4d 뒤에 오는 숫자: 경도(Longitude) ➡️ 126.8554219
+* 
+
+따라서 해당 구글 지도 링크가 가리키고 있는 장소의 정확한 좌표값은 다음과 같이 추출해 낼 수 있습니다.
+
+// 카카오맵 코드에 대입할 정확한 좌표 순서 쌍new kakao.maps.LatLng(35.1502875, 126.8554219)
+
+------------------------------
+## 🛠️ 카카오맵 API 코드에 최종 적용하기
+알아낸 좌표값(35.1502875, 126.8554219)과 장소 텍스트를 기존 소스 코드에 대입하면 아래와 같이 완벽하게 매핑됩니다. 자바스크립트 영역의 좌표 입력부 3곳을 이 숫자로 교체해 주시면 됩니다.
+
+var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+    mapOption = {
+        center: new kakao.maps.LatLng(35.1502875, 126.8554219), // ⭕ 1. 지도의 중심좌표 변경
+        level: 4 
+    };
+var map = new kakao.maps.Map(mapContainer, mapOption);
+var imageSrc = 'https://daumcdn.net',    
+    imageSize = new kakao.maps.Size(64, 69), 
+    imageOption = {offset: new kakao.maps.Point(27, 69)}; 
+var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption),
+    // ⭕ 2. 마커가 표시될 위치 좌표 변경
+    markerPosition = new kakao.maps.LatLng(35.1502875, 126.8554219); 
+var marker = new kakao.maps.Marker({
+    position: markerPosition,
+    image: markerImage 
+});
+marker.setMap(map);
+// ⭕ 3. 커스텀 오버레이 말풍선의 내부 링크 주소와 텍스트 타이틀 매핑 변경var content = '<div class="customoverlay">' +
+    '  <a href="https://kakao.com" target="_blank">' +
+    '    <span class="title">광주광역시 해당 장소</span>' +
+    '  </a>' +
+    '</div>';
+// ⭕ 4. 커스텀 오버레이가 표시될 위치 좌표 변경var position = new kakao.maps.LatLng(35.1502875, 126.8554219);
+var customOverlay = new kakao.maps.CustomOverlay({
+    map: map,
+    position: position,
+    content: content,
+    yAnchor: 1
+});
+
+------------------------------
+추출된 위치는 광주광역시 서구 치평동(상무지구 김대중컨벤션센터 인근 일대) 부근으로 조회가 되네요!
+혹시 이 지도 위에 하나의 마커가 아니라 2개, 3개 이상의 다중 마커를 반복문 구조로 동시에 찍어주는 배열 자바스크립트 기법도 이어서 확장해 볼까요? 궁금하시면 편하게 말씀해 주세요!
+
+
