@@ -1,0 +1,71 @@
+제공해주신 코드에서 지도의 중심 좌표와 커스텀 오버레이(말풍선) 클릭 시 이동하는 카카오맵 링크 주소를 변경하는 방법은 매우 간단합니다.
+자바스크립트(script) 영역 내부에 명시된 위도·경도 숫자와 <a> 태그의 href 주소를 수정하고 싶은 위치 정보로 교체해 주시면 됩니다.
+------------------------------
+## 🛠️ 변경해야 하는 코드 위치와 방법## 1. 지도의 중심 좌표 및 마커 위치 변경
+코드 중간에 총 3군데 존재하며, 동일한 주소를 띄우려면 3곳의 위도(37.xxx)와 경도(127.xxx) 숫자를 모두 똑같이 수정하셔야 합니다.
+
+// ① 지도의 중심좌표 변경
+center: new kakao.maps.LatLng(새로운_위도, 새로운_경도), 
+// ② 마커가 찍힐 위치 변경
+markerPosition = new kakao.maps.LatLng(새로운_위도, 새로운_경도); 
+// ③ 커스텀 오버레이(말풍선)가 뜰 위치 변경
+position = new kakao.maps.LatLng(새로운_위도, 새로운_경도);
+
+## 2. 클릭 시 이동할 카카오맵 링크 주소 및 텍스트 변경
+var content = ... 변수 내부에 있는 HTML 소스 코드 문자열을 교정합니다.
+
+var content = '<div class="customoverlay">' +
+    // ⭕ 여기에 이동시키고 싶은 카카오맵 공식 주소(URL)를 넣으세요.
+    '  <a href="새로운_카카오맵_이동_링크" target="_blank">' +
+    // ⭕ 화면에 표시될 장소 이름 텍스트를 적으세요.
+    '    <span class="title">새로운 장소 이름</span>' +
+    '  </a>' +
+    '</div>';
+
+------------------------------
+## 💡 카카오맵 이동 링크(URL)를 획득하는 가장 쉬운 방법
+내가 원하는 장소의 정확한 카카오맵 링크 주소를 얻으려면 카카오맵에서 공식적으로 제공하는 URL 생성 가이드 규칙을 따르는 것이 가장 안전합니다.
+
+   1. 카카오맵 사이트(map.kakao.com)에 접속하여 원하는 장소를 검색합니다.
+   2. 해당 장소 상세 페이지나 공유하기 단추를 눌러 나오는 링크 중 장소 ID 숫자 번호를 알아냅니다.
+   3. 아래의 규격에 맞춰 content 변수의 href="" 내부에 주소를 대입하세요.
+
+
+* 지도 보기 링크: https://kakao.com (예: 구의야구공원은 11394059)
+* 길찾기 목적지 링크: https://kakao.com
+
+------------------------------
+## 📝 (예시) "독도" 위치(위도: 37.2422, 경도: 131.8692)로 바꾼 실제 코드 구조
+
+// 1. 지도 중심점 독도로 변경var mapContainer = document.getElementById('map'), 
+    mapOption = {
+        center: new kakao.maps.LatLng(37.2422, 131.8692), 
+        level: 4 
+    };
+var map = new kakao.maps.Map(mapContainer, mapOption);
+var imageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png',    
+    imageSize = new kakao.maps.Size(64, 69), 
+    imageOption = {offset: new kakao.maps.Point(27, 69)};
+// 2. 마커 위치 독도로 변경var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption),
+    markerPosition = new kakao.maps.LatLng(37.2422, 131.8692); 
+var marker = new kakao.maps.Marker({
+    position: markerPosition,
+    image: markerImage 
+});
+marker.setMap(map);
+// 3. 링크 주소 및 제목 변경 (독도 플레이스 ID 적용 예시)var content = '<div class="customoverlay">' +
+    '  <a href="https://kakao.com" target="_blank">' +
+    '    <span class="title">아름다운 우리땅 독도</span>' +
+    '  </a>' +
+    '</div>';
+// 4. 오버레이 위치 독도로 변경var position = new kakao.maps.LatLng(37.2422, 131.8692);
+var customOverlay = new kakao.maps.CustomOverlay({
+    map: map,
+    position: position,
+    content: content,
+    yAnchor: 1
+});
+
+------------------------------
+변경하고 싶으신 특정 목적지(주소나 건물 이름)가 지정되어 있나요? 장소를 말씀해 주시면 정확한 위도·경도 좌표값 계산과 매핑될 카카오맵 링크 주소를 직접 추출하여 바로 붙여넣을 수 있는 코드로 만들어 드릴게요!
+
