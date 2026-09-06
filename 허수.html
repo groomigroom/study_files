@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title></title>
+    <title>허수</title>
   </head>
   <body>
       <h1 class="title">Hello World!</h1>
-      <p id="currentTime"></p>
       <script>
+        let title = document.querySelector('.title');
         console.log('김구름')
 
         class Complex {
-          constuctor(re, im) {
+          constructor(re, im) {
             this.re = re;
             this.im = im;
           }
@@ -28,9 +28,12 @@
           }
           
         }
-        // 사용 예시const z1 = new Complex(3, 4);  // 3 + 4iconst z2 = new Complex(1, -2); // 1 - 2i
-        console.log()
-
+        // 사용 예시
+        const z1 = new Complex(3, 4);  
+        // 3 + 4i
+        const z2 = new Complex(1, -2); // 1 - 2i
+        const inumber = z1.add(z2).toString();
+        title.innerText = inumber;
       </script>
   </body>
 </html>
