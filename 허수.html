@@ -19,7 +19,11 @@
             return new Complex(this.re + other.re, this.im + other.im);
           }
 
-          multi
+          multiply(other) {
+            return new Complex (this.re * other.re - this.im * other.im, this.re * other.im + this.im * other.re);
+          }
+
+
         }
 
       </script>
