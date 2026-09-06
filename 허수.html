@@ -23,8 +23,13 @@
             return new Complex (this.re * other.re - this.im * other.im, this.re * other.im + this.im * other.re);
           }
 
-
+          toString() {
+            return `${this.re} ${this.im >= 0 ? '+' : '-'} ${Math.abs(this.im)}i`;
+          }
+          
         }
+        // 사용 예시const z1 = new Complex(3, 4);  // 3 + 4iconst z2 = new Complex(1, -2); // 1 - 2i
+        console.log()
 
       </script>
   </body>
